@@ -1,6 +1,6 @@
 <?php
 
-namespace Alpha\VisitorTrackingBundle\Features\Context;
+namespace Kematjaya\VisitorTrackingBundle\Features\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;

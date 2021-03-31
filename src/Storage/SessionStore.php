@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Alpha\VisitorTrackingBundle\Storage;
+namespace Kematjaya\VisitorTrackingBundle\Storage;
 
-use Alpha\VisitorTrackingBundle\Entity\Lifetime;
-use Alpha\VisitorTrackingBundle\Entity\Session;
+use Kematjaya\VisitorTrackingBundle\Entity\Lifetime;
+use Kematjaya\VisitorTrackingBundle\Entity\Session;
 
 class SessionStore
 {

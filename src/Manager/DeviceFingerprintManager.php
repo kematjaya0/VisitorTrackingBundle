@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpha\VisitorTrackingBundle\Manager;
+namespace Kematjaya\VisitorTrackingBundle\Manager;
 
-use Alpha\VisitorTrackingBundle\Entity\Device;
+use Kematjaya\VisitorTrackingBundle\Entity\Device;
 
 class DeviceFingerprintManager
 {

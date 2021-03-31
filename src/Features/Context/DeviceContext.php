@@ -1,15 +1,15 @@
 <?php
 
-namespace Alpha\VisitorTrackingBundle\Features\Context;
+namespace Kematjaya\VisitorTrackingBundle\Features\Context;
 
-use Alpha\VisitorTrackingBundle\Entity\Session;
-use Alpha\VisitorTrackingBundle\EventListener\VisitorTrackingSubscriber;
+use Kematjaya\VisitorTrackingBundle\Entity\Session;
+use Kematjaya\VisitorTrackingBundle\EventListener\VisitorTrackingSubscriber;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Doctrine\Inflector\InflectorFactory;
 use Doctrine\ORM\EntityManagerInterface;
-use Alpha\VisitorTrackingBundle\Entity\Lifetime;
+use Kematjaya\VisitorTrackingBundle\Entity\Lifetime;
 
 class DeviceContext extends RawMinkContext implements Context, SnippetAcceptingContext
 {

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Alpha\VisitorTrackingBundle\EventListener;
+namespace Kematjaya\VisitorTrackingBundle\EventListener;
 
-use Alpha\VisitorTrackingBundle\Entity\Lifetime;
-use Alpha\VisitorTrackingBundle\Entity\PageView;
-use Alpha\VisitorTrackingBundle\Entity\Session;
-use Alpha\VisitorTrackingBundle\Storage\SessionStore;
+use Kematjaya\VisitorTrackingBundle\Entity\Lifetime;
+use Kematjaya\VisitorTrackingBundle\Entity\PageView;
+use Kematjaya\VisitorTrackingBundle\Entity\Session;
+use Kematjaya\VisitorTrackingBundle\Storage\SessionStore;
 use Doctrine\Inflector\InflectorFactory;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Alpha\VisitorTrackingBundle\DependencyInjection;
+namespace Kematjaya\VisitorTrackingBundle\DependencyInjection;
 
-use Alpha\VisitorTrackingBundle\EventListener\VisitorTrackingSubscriber;
+use Kematjaya\VisitorTrackingBundle\EventListener\VisitorTrackingSubscriber;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;

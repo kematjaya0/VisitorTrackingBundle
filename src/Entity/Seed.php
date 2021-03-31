@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alpha\VisitorTrackingBundle\Entity;
+namespace Kematjaya\VisitorTrackingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

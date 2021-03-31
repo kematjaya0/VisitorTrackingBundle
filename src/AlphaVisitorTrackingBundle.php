@@ -1,6 +1,6 @@
 <?php
 
-namespace Alpha\VisitorTrackingBundle;
+namespace Kematjaya\VisitorTrackingBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

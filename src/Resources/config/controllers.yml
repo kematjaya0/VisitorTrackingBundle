@@ -7,5 +7,5 @@ services:
         bind:
             $entityManager: '@doctrine.orm.entity_manager'
 
-    Alpha\VisitorTrackingBundle\Controller\:
+    Kematjaya\VisitorTrackingBundle\Controller\:
         resource: '../../Controller/*'

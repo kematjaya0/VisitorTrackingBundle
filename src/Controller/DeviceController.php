@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Alpha\VisitorTrackingBundle\Controller;
+namespace Kematjaya\VisitorTrackingBundle\Controller;
 
-use Alpha\VisitorTrackingBundle\Entity\Device;
-use Alpha\VisitorTrackingBundle\Entity\Session;
-use Alpha\VisitorTrackingBundle\Manager\DeviceFingerprintManager;
-use Alpha\VisitorTrackingBundle\Storage\SessionStore;
+use Kematjaya\VisitorTrackingBundle\Entity\Device;
+use Kematjaya\VisitorTrackingBundle\Entity\Session;
+use Kematjaya\VisitorTrackingBundle\Manager\DeviceFingerprintManager;
+use Kematjaya\VisitorTrackingBundle\Storage\SessionStore;
 use Doctrine\ORM\EntityManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;

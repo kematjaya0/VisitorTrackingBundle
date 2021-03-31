@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Alpha\VisitorTrackingBundle\Tests\Manager;
+namespace Kematjaya\VisitorTrackingBundle\Tests\Manager;
 
-use Alpha\VisitorTrackingBundle\Entity\Device;
-use Alpha\VisitorTrackingBundle\Manager\DeviceFingerprintManager;
+use Kematjaya\VisitorTrackingBundle\Entity\Device;
+use Kematjaya\VisitorTrackingBundle\Manager\DeviceFingerprintManager;
 use PHPUnit\Framework\TestCase;
 
 class DeviceFingerprintManagerTest extends TestCase

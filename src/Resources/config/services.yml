@@ -6,7 +6,7 @@ services:
         public: false
         autowire: true
         
-    Alpha\VisitorTrackingBundle\EventListener\VisitorTrackingSubscriber:
+    Kematjaya\VisitorTrackingBundle\EventListener\VisitorTrackingSubscriber:
         arguments:
             $entityManager: "@doctrine.orm.entity_manager"
             $firewallBlacklist: [] # Firewall blacklist, populated from config.
@@ -14,6 +14,6 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
-    Alpha\VisitorTrackingBundle\Manager\DeviceFingerprintManager:
+    Kematjaya\VisitorTrackingBundle\Manager\DeviceFingerprintManager:
 
-    Alpha\VisitorTrackingBundle\Storage\SessionStore:
+    Kematjaya\VisitorTrackingBundle\Storage\SessionStore:
