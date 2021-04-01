@@ -8,12 +8,13 @@ use Kematjaya\VisitorTrackingBundle\Entity\Device;
 use Kematjaya\VisitorTrackingBundle\Entity\Session;
 use Kematjaya\VisitorTrackingBundle\Manager\DeviceFingerprintManager;
 use Kematjaya\VisitorTrackingBundle\Storage\SessionStore;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class DeviceController
+class DeviceController extends AbstractController
 {
     private $entityManager;
 
@@ -24,7 +25,7 @@ class DeviceController
     private $deviceFingerprintManager;
 
     public function __construct(
-        EntityManager $entityManager,
+        EntityManagerInterface $entityManager,
         LoggerInterface $logger,
         SessionStore $sessionStore,
         DeviceFingerprintManager $deviceFingerprintManager
@@ -56,7 +57,7 @@ class DeviceController
             $this->entityManager->persist($device);
             $this->entityManager->flush($device);
 
-            $this->logger->debug(\sprintf('A new device fingerprint was added with the id %d.', $device->getId()));
+            $this->logger->debug(\sprintf('A new device fingerprint was added with the id %d.', (string) $device->getId()));
 
             return new Response('', 201);
         }

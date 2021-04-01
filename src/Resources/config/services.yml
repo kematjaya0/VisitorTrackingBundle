@@ -1,11 +1,13 @@
-imports:
-    - { resource: 'controllers.yml' }
-
 services:
     _defaults:
-        public: false
+        public: true
         autowire: true
         
+    Kematjaya\VisitorTrackingBundle\Controller\DeviceController:
+        class: Kematjaya\VisitorTrackingBundle\Controller\DeviceController
+        calls: 
+            - setContainer: ['@service_container']
+            
     Kematjaya\VisitorTrackingBundle\EventListener\VisitorTrackingSubscriber:
         arguments:
             $entityManager: "@doctrine.orm.entity_manager"
@@ -13,6 +15,9 @@ services:
             $firewallMap: "@security.firewall.map"
         tags:
             - { name: kernel.event_subscriber }
+            
+    Kematjaya\VisitorTrackingBundle\Repository\VisitorTrackingRepositoryInterface:
+        class: Kematjaya\VisitorTrackingBundle\Repository\VisitorTrackingRepository
 
     Kematjaya\VisitorTrackingBundle\Manager\DeviceFingerprintManager:
 

@@ -131,6 +131,11 @@ class Session
 
     public function __construct()
     {
+        if (!class_exists('Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator')) {
+            
+            throw new \Exception(sprintf('uuid generator not exist, try to run: "%s"', 'composer req symfony/doctrine-bridge'));
+        }
+        
         $this->pageViews = new ArrayCollection();
         $this->devices = new ArrayCollection();
         $this->created = new \DateTime();
