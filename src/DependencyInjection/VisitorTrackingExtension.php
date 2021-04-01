@@ -16,11 +16,12 @@ class VisitorTrackingExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
+        $container->setParameter('session_subscriber', $config['session_subscriber']);
+        
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
-
-        $this->handleFirewallBlacklist($container, $config);
+        
+        //$this->handleFirewallBlacklist($container, $config);
     }
 
     private function handleFirewallBlacklist(ContainerBuilder $container, array $config): void

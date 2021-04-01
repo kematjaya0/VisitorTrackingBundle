@@ -9,7 +9,7 @@ use Kematjaya\VisitorTrackingBundle\Entity\PageView;
 use Kematjaya\VisitorTrackingBundle\Entity\Session;
 use Kematjaya\VisitorTrackingBundle\Storage\SessionStore;
 use Doctrine\Inflector\InflectorFactory;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -19,6 +19,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
  * Tracks the source of a session and each page view in that session.
@@ -44,19 +46,23 @@ class VisitorTrackingSubscriber implements EventSubscriberInterface
     private $sessionStore;
 
     private $firewallBlacklist;
+    
+    private $excludePaths;
 
     private $firewallMap;
 
     public function __construct(
-        EntityManager $entityManager,
+        EntityManagerInterface $entityManager,
         SessionStore $sessionStore,
-        array $firewallBlacklist,
-        FirewallMap $firewallMap
+        ParameterBagInterface $bag,
+        ContainerInterface $container
     ) {
+        $configs = $bag->get('session_subscriber');
         $this->entityManager = $entityManager;
         $this->sessionStore = $sessionStore;
-        $this->firewallBlacklist = $firewallBlacklist;
-        $this->firewallMap = $firewallMap;
+        $this->firewallBlacklist = $configs['firewall_blacklist'];
+        $this->excludePaths = $configs['exclude_path'];
+        $this->firewallMap = $container->get('visitor.security.firewall.map');
     }
 
     public static function getSubscribedEvents(): iterable
@@ -70,22 +76,33 @@ class VisitorTrackingSubscriber implements EventSubscriberInterface
     public function onKernelRequest(RequestEvent $event): void
     {
         $request = $event->getRequest();
-
+        foreach ($this->excludePaths as $exclude) {
+            $search = preg_quote($exclude, '/');
+            if (preg_match('/^'.$search.'(.*)/i', $request->getPathInfo())) {
+                
+                return;
+            }
+        }
+        
         if ($this->isBlacklistedFirewall($request) || !$this->shouldActOnRequest($request)) {
             return;
         }
 
-        if ($request->cookies->has(self::COOKIE_SESSION)) {
-            $session = $this->entityManager->getRepository(Session::class)->find($request->cookies->get(self::COOKIE_SESSION));
-
-            if ($session instanceof Session && (!$this->requestHasUTMParameters($request) || $this->sessionMatchesRequestParameters($request))) {
-                $this->sessionStore->setSession($session);
-            } else {
-                $this->generateSessionAndLifetime($request);
-            }
-        } else {
+        if (!$request->cookies->has(self::COOKIE_SESSION)) {
             $this->generateSessionAndLifetime($request);
+            
+            return;
         }
+        
+        $session = $this->entityManager->getRepository(Session::class)->find($request->cookies->get(self::COOKIE_SESSION));
+
+        if ($session instanceof Session && (!$this->requestHasUTMParameters($request) || $this->sessionMatchesRequestParameters($request))) {
+            $this->sessionStore->setSession($session);
+            
+            return;
+        }
+        
+        $this->generateSessionAndLifetime($request);
     }
 
     public function onKernelResponse(ResponseEvent $event): void

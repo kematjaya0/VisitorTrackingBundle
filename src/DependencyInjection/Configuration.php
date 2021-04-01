@@ -43,6 +43,11 @@ class Configuration implements ConfigurationInterface
             ->defaultValue([])
             ->prototype('scalar')
             ->cannotBeEmpty();
+        
+        $rootNode->children()->arrayNode('exclude_path')
+            ->defaultValue([])
+            ->prototype('scalar')
+            ->cannotBeEmpty();
 
         return $rootNode;
     }

@@ -7,12 +7,12 @@ services:
         class: Kematjaya\VisitorTrackingBundle\Controller\DeviceController
         calls: 
             - setContainer: ['@service_container']
-            
+      
+    visitor.security.firewall.map:
+        alias: security.firewall.map
+        public: true
+        
     Kematjaya\VisitorTrackingBundle\EventListener\VisitorTrackingSubscriber:
-        arguments:
-            $entityManager: "@doctrine.orm.entity_manager"
-            $firewallBlacklist: [] # Firewall blacklist, populated from config.
-            $firewallMap: "@security.firewall.map"
         tags:
             - { name: kernel.event_subscriber }
             
