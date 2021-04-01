@@ -10,16 +10,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * @ORM\Table(name="tracking_lifetime")
  * @ORM\Entity
  */
 class Lifetime
 {
     /**
-     * @var string
-     *
-     * @ORM\Column(type="guid")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="UUID")
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
@@ -49,12 +48,11 @@ class Lifetime
     {
         $this->sessions = new ArrayCollection();
         $this->seeds = new ArrayCollection();
+        $this->created = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
-    public function getId()
+    
+    public function getId():?int
     {
         return $this->id;
     }

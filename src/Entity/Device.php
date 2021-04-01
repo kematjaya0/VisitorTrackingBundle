@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * @ORM\Table(name="tracking_device")
  * @ORM\Entity
  */
 class Device
@@ -93,6 +94,11 @@ class Device
      */
     protected $created;
 
+    public function __construct() 
+    {
+        $this->created = new \DateTime();
+    }
+    
     /**
      * @return int
      */

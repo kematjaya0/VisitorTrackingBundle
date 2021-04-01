@@ -7,6 +7,7 @@ namespace Kematjaya\VisitorTrackingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="tracking_dees")
  * @ORM\Entity
  */
 class Seed

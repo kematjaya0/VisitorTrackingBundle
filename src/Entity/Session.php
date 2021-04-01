@@ -16,11 +16,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Session
 {
     /**
-     * @var string
-     *
-     * @ORM\Column(type="guid")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="UUID")
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
@@ -134,6 +132,7 @@ class Session
     {
         $this->pageViews = new ArrayCollection();
         $this->devices = new ArrayCollection();
+        $this->created = new \DateTime();
     }
 
     public function __toString(): string
@@ -150,7 +149,7 @@ class Session
     /**
      * @return string
      */
-    public function getId()
+    public function getId():?string
     {
         return $this->id;
     }

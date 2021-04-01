@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * @ORM\Table(name="tracking_page_view")
  * @ORM\Entity
  */
 class PageView
@@ -43,6 +44,10 @@ class PageView
      */
     protected $created;
 
+    public function __construct() 
+    {
+        $this->created = new \DateTime();
+    }
     /**
      * @return int
      */

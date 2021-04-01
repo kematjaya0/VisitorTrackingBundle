@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 /**
  * Tracks the source of a session and each page view in that session.
@@ -67,7 +67,7 @@ class VisitorTrackingSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onKernelRequest(GetResponseEvent $event): void
+    public function onKernelRequest(RequestEvent $event): void
     {
         $request = $event->getRequest();
 
@@ -88,7 +88,7 @@ class VisitorTrackingSubscriber implements EventSubscriberInterface
         }
     }
 
-    public function onKernelResponse(FilterResponseEvent $event): void
+    public function onKernelResponse(ResponseEvent $event): void
     {
         if ($this->isBlacklistedFirewall($event->getRequest())) {
             return;
@@ -105,11 +105,11 @@ class VisitorTrackingSubscriber implements EventSubscriberInterface
 
         if (!$request->cookies->has(self::COOKIE_LIFETIME)) {
             \assert($session->getLifetime() instanceof Lifetime);
-            $response->headers->setCookie(new Cookie(self::COOKIE_LIFETIME, $session->getLifetime()->getId(), new \DateTime('+2 years'), '/', null, false, false));
+            $response->headers->setCookie(new Cookie(self::COOKIE_LIFETIME, (string)$session->getLifetime()->getId(), (new \DateTime('+2 years'))->format('U'), '/', null, false, false));
         }
 
         if (!$request->cookies->has(self::COOKIE_SESSION) || ($request->cookies->get(self::COOKIE_SESSION) !== $session->getId())) {
-            $response->headers->setCookie(new Cookie(self::COOKIE_SESSION, $session->getId(), 0, '/', null, false, false));
+            $response->headers->setCookie(new Cookie(self::COOKIE_SESSION, (string)$session->getId(), 0, '/', null, false, false));
         }
 
         if (!$this->shouldActOnRequest($request)) {
