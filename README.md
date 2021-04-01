@@ -8,3 +8,4 @@ Visitor Tracking Bundle
 =======================
 
 A Symfony bundle to track requests.
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
