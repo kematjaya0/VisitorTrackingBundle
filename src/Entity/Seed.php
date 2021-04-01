@@ -14,9 +14,9 @@ class Seed
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="uuid")
+     * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class=Doctrine\ORM\Id\UuidGenerator::class)
+     * @ORM\CustomIdGenerator(class=Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator::class)
      */
     protected $id;
 
@@ -47,9 +47,9 @@ class Seed
         $this->setValue($numberOfValues, $weights);
     }
 
-    public function getId():?string
+    public function getId():?\Symfony\Component\Uid\Uuid
     {
-        return (string) $this->id;
+        return $this->id;
     }
 
     /**

@@ -37,22 +37,24 @@
         "doctrine/doctrine-bundle": "^2.3",
         "doctrine/inflector": "^2.0",
         "doctrine/orm": "^2.7",
-        "stof/doctrine-extensions-bundle": "*",
-        "symfony/framework-bundle": "^5.0|^4.0",
-        "symfony/security-bundle": "^4.0|^5.0"
+        "friends-of-behat/mink-extension": "^2.5",
+        "stof/doctrine-extensions-bundle": "^1.6",
+        "symfony/doctrine-bridge": "^5.2",
+        "symfony/framework-bundle": "^5.2",
+        "symfony/phpunit-bridge": "^5.2",
+        "symfony/security-bundle": "^5.2",
+        "symfony/uid": "^5.2"
     },
     "require-dev": {
         "behat/behat": "^3.8",
-        "behat/mink-extension": "^2.3",
         "friends-of-behat/symfony-extension": "^2.2",
-        "friendsofphp/php-cs-fixer": "*",
-        "php-coveralls/php-coveralls": "^2.1",
+        "friendsofphp/php-cs-fixer": "^2.18",
+        "php-coveralls/php-coveralls": "^2.4",
         "phpstan/phpstan": "^0.12.82",
         "phpstan/phpstan-phpunit": "^0.12.18",
         "phpunit/phpunit": "^8.0",
-        "sensiolabs/security-checker": "^5.0",
-        "slam/phpstan-extensions": "^4.0",
-        "symfony/phpunit-bridge": "^5.2"
+        "sensiolabs/security-checker": "^6.0",
+        "slam/phpstan-extensions": "^5.0"
     },
 
     "scripts": {
