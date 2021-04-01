@@ -14,11 +14,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Device
 {
     /**
-     * @var int
-     *
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="uuid")
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=Doctrine\ORM\Id\UuidGenerator::class)
      */
     protected $id;
 
@@ -99,12 +98,9 @@ class Device
         $this->created = new \DateTime();
     }
     
-    /**
-     * @return int
-     */
-    public function getId()
+    public function getId():?string
     {
-        return $this->id;
+        return (string) $this->id;
     }
 
     /**

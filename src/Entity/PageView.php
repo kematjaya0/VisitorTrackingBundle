@@ -14,11 +14,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class PageView
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="uuid")
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=Doctrine\ORM\Id\UuidGenerator::class)
      */
     protected $id;
 
@@ -48,12 +47,10 @@ class PageView
     {
         $this->created = new \DateTime();
     }
-    /**
-     * @return int
-     */
-    public function getId()
+    
+    public function getId():?string
     {
-        return $this->id;
+        return (string)$this->id;
     }
 
     /**

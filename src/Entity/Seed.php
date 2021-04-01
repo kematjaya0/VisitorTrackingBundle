@@ -7,17 +7,16 @@ namespace Kematjaya\VisitorTrackingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="tracking_dees")
+ * @ORM\Table(name="tracking_feed")
  * @ORM\Entity
  */
 class Seed
 {
     /**
-     * @var int
-     *
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="uuid")
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=Doctrine\ORM\Id\UuidGenerator::class)
      */
     protected $id;
 
@@ -48,12 +47,9 @@ class Seed
         $this->setValue($numberOfValues, $weights);
     }
 
-    /**
-     * @return int
-     */
-    public function getId()
+    public function getId():?string
     {
-        return $this->id;
+        return (string) $this->id;
     }
 
     /**

@@ -17,8 +17,9 @@ class Session
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="uuid")
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=Doctrine\ORM\Id\UuidGenerator::class)
      */
     protected $id;
 
@@ -151,7 +152,7 @@ class Session
      */
     public function getId():?string
     {
-        return $this->id;
+        return (string) $this->id;
     }
 
     /**
