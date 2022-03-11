@@ -17,9 +17,8 @@ class Session
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class=Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator::class)
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     protected $id;
 
@@ -155,7 +154,7 @@ class Session
     /**
      * @return string
      */
-    public function getId():?\Symfony\Component\Uid\Uuid
+    public function getId():?int
     {
         return $this->id;
     }

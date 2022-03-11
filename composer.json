@@ -43,8 +43,7 @@
         "symfony/doctrine-bridge": "^5.4",
         "symfony/framework-bundle": "^5.2",
         "symfony/phpunit-bridge": "^5.2",
-        "symfony/security-bundle": "^5.2",
-        "symfony/uid": "^5.2"
+        "symfony/security-bundle": "^5.2"
     },
     "require-dev": {
         "behat/behat": "^3.8",
