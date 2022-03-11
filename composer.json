@@ -40,7 +40,7 @@
         "friends-of-behat/mink-extension": "^2.5",
         "mukadi/chartjs-bundle": "^2.0",
         "stof/doctrine-extensions-bundle": "^1.6",
-        "symfony/doctrine-bridge": "^5.2",
+        "symfony/doctrine-bridge": "^5.4",
         "symfony/framework-bundle": "^5.2",
         "symfony/phpunit-bridge": "^5.2",
         "symfony/security-bundle": "^5.2",
