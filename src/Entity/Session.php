@@ -130,11 +130,6 @@ class Session
 
     public function __construct()
     {
-        if (!class_exists('Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator')) {
-            
-            throw new \Exception(sprintf('uuid generator not exist, try to run: "%s"', 'composer req symfony/doctrine-bridge'));
-        }
-        
         $this->pageViews = new ArrayCollection();
         $this->devices = new ArrayCollection();
         $this->created = new \DateTime();
@@ -142,7 +137,7 @@ class Session
 
     public function __toString(): string
     {
-        $id = $this->getId();
+        $id = (string)$this->getId();
 
         if (!\is_string($id)) {
             return 'N/A';
@@ -152,7 +147,7 @@ class Session
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getId():?int
     {
