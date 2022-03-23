@@ -10,7 +10,6 @@ use Kematjaya\VisitorTrackingBundle\Entity\Session;
 use Kematjaya\VisitorTrackingBundle\Storage\SessionStore;
 use Doctrine\Inflector\InflectorFactory;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -76,14 +75,6 @@ class VisitorTrackingSubscriber implements EventSubscriberInterface
     public function onKernelRequest(RequestEvent $event): void
     {
         $request = $event->getRequest();
-        foreach ($this->excludePaths as $exclude) {
-            $search = preg_quote($exclude, '/');
-            if (preg_match('/^'.$search.'(.*)/i', $request->getPathInfo())) {
-                
-                return;
-            }
-        }
-        
         if ($this->isBlacklistedFirewall($request) || !$this->shouldActOnRequest($request)) {
             return;
         }
@@ -103,6 +94,13 @@ class VisitorTrackingSubscriber implements EventSubscriberInterface
         }
         
         $this->generateSessionAndLifetime($request);
+        foreach ($this->excludePaths as $exclude) {
+            $search = preg_quote($exclude, '/');
+            if (preg_match('/^'.$search.'(.*)/i', $request->getPathInfo())) {
+                
+                return;
+            }
+        }
     }
 
     public function onKernelResponse(ResponseEvent $event): void
@@ -133,6 +131,14 @@ class VisitorTrackingSubscriber implements EventSubscriberInterface
             return;
         }
 
+        foreach ($this->excludePaths as $exclude) {
+            $search = preg_quote($exclude, '/');
+            if (preg_match('/^'.$search.'(.*)/i', $request->getPathInfo())) {
+                
+                return;
+            }
+        }
+        
         $pageView = new PageView();
         $pageView->setUrl($request->getUri());
         $session->addPageView($pageView);
@@ -201,8 +207,8 @@ class VisitorTrackingSubscriber implements EventSubscriberInterface
     private function shouldActOnRequest(Request $request, ?Response $response = null): bool
     {
         $route = $request->attributes->get('_route');
-
-        if ($response instanceof RedirectResponse || (!\is_string($route) || 0 === \strpos($route, '_'))) {
+        
+        if ($response instanceof RedirectResponse || (!\is_string($route))) {
             //these are requests for assets/symfony toolbar etc. Not relevant for our tracking
             return false;
         }

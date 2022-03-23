@@ -45,7 +45,7 @@ class Configuration implements ConfigurationInterface
             ->cannotBeEmpty();
         
         $rootNode->children()->arrayNode('exclude_path')
-            ->defaultValue([])
+            ->defaultValue(['/device/', '/_wdt'])
             ->prototype('scalar')
             ->cannotBeEmpty();
 

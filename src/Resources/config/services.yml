@@ -22,3 +22,7 @@ services:
     Kematjaya\VisitorTrackingBundle\Manager\DeviceFingerprintManager:
 
     Kematjaya\VisitorTrackingBundle\Storage\SessionStore:
+        
+    Kematjaya\VisitorTrackingBundle\Twig\DeviceExtension:
+        class: Kematjaya\VisitorTrackingBundle\Twig\DeviceExtension
+        tags: ['twig.extension']

@@ -148,7 +148,7 @@ var __mmapiwsStateLendable = {}, __mmapiwsRunLendable = function (flashFonts, fl
                 var str = String(obj);
                 return str = str.replace(/[\\"']/g, "\\$&").replace(/\u0000/g, "\\0"), '"' + str + '"'
             }, createUri = function (version) {
-            return Routing.generate('_alpha_device_fingerprint');
+            return _route;
         }, handleResponse = function (xhr, version, device) {
             var responseValues = xhr.responseText.split(/;/), domain = responseValues[0], id = responseValues[1], serverIpVersion = parseInt(responseValues[2], 10);
             "undefined" != typeof id && setStoredIds(domain, id), 6 === version && 6 === serverIpVersion && sendToServer(device, 4)
