@@ -36,6 +36,6 @@ class DeviceExtension extends \Twig\Extension\AbstractExtension
     
     public function render()
     {
-        return $this->twig->render("@VisitorTrackingBundle/_device.twig");
+        return $this->twig->render("@VisitorTracking/_device.twig");
     }
 }
