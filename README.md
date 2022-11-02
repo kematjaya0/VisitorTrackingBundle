@@ -8,4 +8,13 @@ Visitor Tracking Bundle
 =======================
 
 A Symfony bundle to track requests.
+1. Installation
+```
+composer require kematjaya/visitor-tracking-bundle
+```
+2. Update Database
+```
+php bin/console doctrine:schema:update --force
+```
+
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
