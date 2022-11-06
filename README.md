@@ -17,4 +17,16 @@ composer require kematjaya/visitor-tracking-bundle
 php bin/console doctrine:schema:update --force
 ```
 
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+3. Import Routing
+```
+## config/routes/annotations.yaml
+visitor:
+    resource: "@VisitorTrackingBundle/Resources/config/routing.yml"
+```
+4. Add Js to base.html.twig 
+```
+{{ device_js() }}
+```
+
+troubleshoot in postgresql
+- CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

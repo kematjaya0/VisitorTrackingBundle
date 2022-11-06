@@ -31,7 +31,7 @@ class Device
     /**
      * @var string
      *
-     * @ORM\Column(type="json_array")
+     * @ORM\Column(type="json")
      */
     protected $fingerprint;
 
@@ -126,6 +126,18 @@ class Device
     public function getFingerprint()
     {
         return $this->fingerprint;
+    }
+    
+    /**
+     * @return array|null
+     */
+    public function getFingerprintAsArray()
+    {
+        if (null === $this->fingerprint) {
+            return null;
+        }
+        
+        return json_decode($this->fingerprint, true);
     }
 
     /**
